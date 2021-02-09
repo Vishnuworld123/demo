@@ -1,0 +1,71 @@
+<html>
+<title>Employee Data</title>
+
+<body>
+
+<h1>Employee Records</h1>
+
+<!-- <div class="pagination">
+    <span class="step-links">
+        {% if employee.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ employee.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ employee.number }} of {{ employee.paginator.num_pages }}.
+        </span>
+
+        {% if employee.has_next %}
+            <a href="?page={{ employee.next_page_number }}">next</a>
+            <a href="?page={{ employee.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div> -->
+{% if employee.has_other_pages %}
+  <ul class="pagination">
+    {% if employee.has_previous %}
+      <li><a href="?page={{ employee.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in employee.paginator.page_range %}
+      {% if employee.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if employee.has_next %}
+      <li><a href="?page={{ employee.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+<table border="1">
+    <thed>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Salary</th>
+    </thed>
+    <tbody>
+        {% for e in employee %}
+            <tr>
+                <td>{{e.id}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.salary}}</td>
+            </tr>
+
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+
+
+
+</body>
+</html>
